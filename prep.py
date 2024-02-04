@@ -66,7 +66,7 @@ for record in all_records:
 
 # Display records in a grid format
 for subject, records in subject_records.items():
-    st.markdown("### Subject: " + subject)
+    st.markdown("### " + subject)
     df = pd.DataFrame(records)
     
     # Set background color based on strength value
