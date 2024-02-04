@@ -26,7 +26,7 @@ st.markdown("### EVERY ONE STARTS AT ZERO. BUT IT MATTERS WHO TURNS INTO HERO")
 
 subject = st.selectbox('SELECT SUBJECT', ['MATHEMATICS', 'SCIENCE', 'SOCIAL', 'PSYCHOLOGY', 'TELUGU', 'ENGLISH'])
 topic = st.text_input('ENTER TOPIC')
-marks = st.text_input('Marks (optional)')
+marks = st.text_input('MARKS (X/Y)')
 strength = st.selectbox('STRENGTH', ['WEAK', 'MEDIUM', 'STRONG'])
 
 if st.button('Submit'):
