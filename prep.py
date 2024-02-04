@@ -1,13 +1,8 @@
 import streamlit as st
 from pymongo import MongoClient
 import pandas as pd
-from pymongo import MongoClient
 
 # Connect to MongoDB Atlas
-# client = MongoClient("mongodb+srv://pavan_tech:U0q0E6cdGK2CCNtY@cluster0.3zqhlo9.mongodb.net/?retryWrites=true&w=majority")
-# db = client.get_database('pavan')
-# records = db.test
-# Replace <YOUR_MONGODB_URI> with your actual MongoDB URI
 mongo_uri = "mongodb+srv://pavan_tech1:Amma9502@cluster0.3zqhlo9.mongodb.net/?retryWrites=true&w=majority"
 client = MongoClient(mongo_uri)
 
@@ -15,8 +10,16 @@ client = MongoClient(mongo_uri)
 db = client.get_database('pavan')
 collection = db.get_collection('users')
 records = db.test
+
+
 # Streamlit UI
-st.title("HELLO SAKEE MADAME")
+usernames = ['SAKEE', 'BHAVANI', 'PRASANTHI', 'ASHWINI']
+username = st.selectbox('SELECT USERNAME', usernames)
+if username == 'SAKEE':
+    st.title(f"HELLO {username} MADAME")
+else:
+    st.title(f"HELLO {username}")
+# st.markdown("<style>h1{color: rgb(255, 105, 180);}</style>", unsafe_allow_html=True)
 st.caption("A GOOD TEACHER IS LIKE A CANDLE. IT CONSUMES ITSELF TO LIGHT THE WAY FOR OTHERS")
 
 st.markdown("### EVERY ONE STARTS AT ZERO. BUT IT MATTERS WHO TURNS INTO HERO")
@@ -28,6 +31,7 @@ strength = st.selectbox('STRENGTH', ['WEAK', 'MEDIUM', 'STRONG'])
 
 if st.button('Submit'):
     new_record = {
+        'username': username,
         'subject': subject,
         'topic': topic,
         'marks': marks,
@@ -36,9 +40,9 @@ if st.button('Submit'):
     records.insert_one(new_record)
 
 # Fetch records and display
-all_records = records.find()
+all_records = records.find({'username': username})
 
-# Create a dictionary to store records by subject
+#Create a dictionary to store records by subject
 subject_records = {}
 
 for record in all_records:
@@ -75,4 +79,6 @@ for subject, records in subject_records.items():
             return [''] * len(row)
     
     st.dataframe(df.style.apply(highlight_strength, axis=1))
-
+    
+  
+    
