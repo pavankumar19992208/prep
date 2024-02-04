@@ -64,5 +64,15 @@ for record in all_records:
 for subject, records in subject_records.items():
     st.markdown("### Subject: " + subject)
     df = pd.DataFrame(records)
-    st.dataframe(df)
+    
+    # Set background color based on strength value
+    def highlight_strength(row):
+        if row['strength'] == 'STRONG':
+            return ['background-color: rgba(0,255,0, 0.1)'] * len(row)
+        elif row['strength'] == 'WEAK':
+            return ['background-color: rgba(255, 0, 0, 0.1)'] * len(row)
+        else:
+            return [''] * len(row)
+    
+    st.dataframe(df.style.apply(highlight_strength, axis=1))
 
